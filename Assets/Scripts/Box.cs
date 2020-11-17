@@ -5,28 +5,23 @@ using UnityEngine;
 
 public class Box : MonoBehaviour
 {
-   
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Stack<Vector3> boxmoves;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        boxmoves = new Stack<Vector3>();
     }
 
     public bool MoveBox(Vector3 directions)
     {
-        if (BoxBlocked(directions))
+        if (BoxBlocked(directions))                                                                 //check if box is blocked or not to be able to move or not 
         {
             return false;
         }
         else
         {
             this.transform.position += directions;
+            boxmoves.Push(this.transform.position);
             return true;
         }
        
@@ -56,7 +51,5 @@ public class Box : MonoBehaviour
         }
             return false;
     }
-
-
-    
+   
 }

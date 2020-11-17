@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
     private Vector3 startPos = new Vector3(-6.5f,0.5f,0);         // where the player will spawn , need this for better game design later 
     public Vector2 dir;
+
+    public Stack<Vector3> moves;
 
    
 
@@ -14,6 +17,7 @@ public class Player : MonoBehaviour
     {
         transform.position = startPos;
         dir = Vector2.zero;
+        
        
     }
 
@@ -32,6 +36,7 @@ public class Player : MonoBehaviour
             if (!BlockMove(transform.position , Vector3.right))
             {
                 this.transform.position += new Vector3(1, 0, 0);
+                
             }  
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow) )
@@ -39,6 +44,7 @@ public class Player : MonoBehaviour
             if (!BlockMove(transform.position, Vector3.left))
             {
                 this.transform.position += new Vector3(-1, 0, 0);
+               
             }        
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow) )
@@ -46,6 +52,7 @@ public class Player : MonoBehaviour
             if (!BlockMove(transform.position, Vector3.down))
             {
                 this.transform.position += new Vector3(0, -1, 0);
+                
             }         
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow)  )
