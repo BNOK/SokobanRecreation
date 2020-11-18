@@ -8,6 +8,8 @@ public struct UndoableChange
     private List<ObjectState> _before;
     private List<ObjectState> _after;
 
+   
+
     public UndoableChange(List<ObjectState> before, List<ObjectState> after)
     {
         _before = before;
@@ -20,7 +22,5 @@ public struct UndoableChange
         {
             state.Apply();
         }
-    }
-
-   
+    } 
 }

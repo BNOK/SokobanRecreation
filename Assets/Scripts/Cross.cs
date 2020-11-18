@@ -4,23 +4,35 @@ using UnityEngine;
 
 public class Cross : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private GameObject[] boxes;
+    public int score=0;
+
+
+    private void Start()
     {
-        
+        boxes = GameObject.FindGameObjectsWithTag("box");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        Check();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void Check()
     {
-        if (collision.gameObject.tag == "box")
+        foreach(var box in boxes)
         {
-            Debug.Log("Box here");
+            if (this.transform.position == box.transform.position)
+            {
+                score++;
+                box.GetComponent<SpriteRenderer>().color = Color.red;
+            }
+            else
+            {
+                box.GetComponent<SpriteRenderer>().color = Color.white;
+            }
         }
     }
+
 }

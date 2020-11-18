@@ -30,13 +30,18 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
+        var before = new ObjectState(this.gameObject);
+
         // moving code 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         { 
             if (!BlockMove(transform.position , Vector3.right))
             {
-                this.transform.position += new Vector3(1, 0, 0);
-                
+                this.transform.position += new Vector3(1, 0, 0);                    //changes the transform
+
+                var after = new ObjectState(this.gameObject);                       // creates an object state instance
+
+                UndoIt.AddAction(new UndoableChangePlayer(before, after));          // add the the undoable change Player instance to a stack 
             }  
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow) )
@@ -44,7 +49,10 @@ public class Player : MonoBehaviour
             if (!BlockMove(transform.position, Vector3.left))
             {
                 this.transform.position += new Vector3(-1, 0, 0);
-               
+
+                var after = new ObjectState(this.gameObject);
+
+                UndoIt.AddAction(new UndoableChangePlayer(before, after));
             }        
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow) )
@@ -52,7 +60,10 @@ public class Player : MonoBehaviour
             if (!BlockMove(transform.position, Vector3.down))
             {
                 this.transform.position += new Vector3(0, -1, 0);
-                
+
+                var after = new ObjectState(this.gameObject);
+
+                UndoIt.AddAction(new UndoableChangePlayer(before, after));
             }         
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow)  )
@@ -60,19 +71,25 @@ public class Player : MonoBehaviour
             if (!BlockMove(transform.position, Vector3.up))
             {
                 this.transform.position += new Vector3(0, 1, 0);
-                
+
+                var after = new ObjectState(this.gameObject);
+
+                UndoIt.AddAction(new UndoableChangePlayer(before, after));
             }             
         }
+        
+        
+
     }
 
 
    private bool BlockMove(Vector3 position,Vector3 direction)
    {
-        Vector3 newPos = new Vector3(position.x, position.y,0) + direction;
+        Vector3 newPos = new Vector3(position.x, position.y,0) + direction;     // the new position 
 
-        GameObject[] walls = GameObject.FindGameObjectsWithTag("wall"); 
+        GameObject[] walls = GameObject.FindGameObjectsWithTag("wall");         // the walls of the level 
 
-        foreach (var wall in walls)
+        foreach (var wall in walls)                                             // check if player hit walls    
         {
             
             if (wall.transform.position == newPos)
@@ -82,7 +99,7 @@ public class Player : MonoBehaviour
             
         }
 
-        GameObject[] boxes = GameObject.FindGameObjectsWithTag("box");
+        GameObject[] boxes = GameObject.FindGameObjectsWithTag("box");           // same functionalities but with boxes 
         foreach (var box in boxes)
         {
             if (box.transform.position == newPos)
@@ -90,18 +107,18 @@ public class Player : MonoBehaviour
                 Box bx = box.GetComponent<Box>();
                 if (bx && bx.MoveBox(direction))
                 {
-                    Debug.Log("false");
+                    
                     return false;
                 }
                 else 
                 {
-                    Debug.Log("true");
+                    
                     return true;
                 }
             }
             
         }
-        Debug.Log("false 02");
+        
         return false;
    }
 

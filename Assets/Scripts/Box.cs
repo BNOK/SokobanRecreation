@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Box : MonoBehaviour
 {
-    public Stack<Vector3> boxmoves;
+    private GameObject[] allBoxes;
 
     private void Start()
     {
-        boxmoves = new Stack<Vector3>();
+        allBoxes = GameObject.FindGameObjectsWithTag("box");
     }
 
     public bool MoveBox(Vector3 directions)
     {
+        var before = allBoxes.Select(obj => new ObjectState(obj)).ToList();
         if (BoxBlocked(directions))                                                                 //check if box is blocked or not to be able to move or not 
         {
             return false;
@@ -21,7 +23,8 @@ public class Box : MonoBehaviour
         else
         {
             this.transform.position += directions;
-            boxmoves.Push(this.transform.position);
+            var after = allBoxes.Select(obj => new ObjectState(obj)).ToList();
+            UndoIt.AddBoxAction(new UndoableChange(before, after));
             return true;
         }
        
