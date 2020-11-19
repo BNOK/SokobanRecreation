@@ -1,11 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Cross : MonoBehaviour
 {
+    // parametres
     private GameObject[] boxes;
     public int score=0;
+    // colliders to check if boxes are touching 
+    public Collider2D corss;
+    public Collider2D box;
+
 
 
     private void Start()
@@ -15,24 +21,10 @@ public class Cross : MonoBehaviour
 
     private void Update()
     {
-        Check();
+
     }
 
 
-    private void Check()
-    {
-        foreach(var box in boxes)
-        {
-            if (this.transform.position == box.transform.position)
-            {
-                score++;
-                box.GetComponent<SpriteRenderer>().color = Color.red;
-            }
-            else
-            {
-                box.GetComponent<SpriteRenderer>().color = Color.white;
-            }
-        }
-    }
+    
 
 }

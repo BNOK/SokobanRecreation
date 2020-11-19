@@ -9,13 +9,12 @@ public class Player : MonoBehaviour
     public Vector2 dir;
 
     public Stack<Vector3> moves;
-
-   
+    public int mov =0;
 
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = startPos;
+       
         dir = Vector2.zero;
         
        
@@ -42,6 +41,7 @@ public class Player : MonoBehaviour
                 var after = new ObjectState(this.gameObject);                       // creates an object state instance
 
                 UndoIt.AddAction(new UndoableChangePlayer(before, after));          // add the the undoable change Player instance to a stack 
+                mov++;
             }  
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow) )
@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
                 var after = new ObjectState(this.gameObject);
 
                 UndoIt.AddAction(new UndoableChangePlayer(before, after));
+                mov++;
             }        
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow) )
@@ -64,6 +65,7 @@ public class Player : MonoBehaviour
                 var after = new ObjectState(this.gameObject);
 
                 UndoIt.AddAction(new UndoableChangePlayer(before, after));
+                mov++;
             }         
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow)  )
@@ -75,6 +77,7 @@ public class Player : MonoBehaviour
                 var after = new ObjectState(this.gameObject);
 
                 UndoIt.AddAction(new UndoableChangePlayer(before, after));
+                mov++;
             }             
         }
         

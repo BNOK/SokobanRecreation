@@ -8,6 +8,7 @@ TagManager:
   - player
   - box
   - cross
+  - playermovement
   layers:
   - Default
   - TransparentFX
