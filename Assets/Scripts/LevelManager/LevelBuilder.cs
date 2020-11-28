@@ -8,5 +8,4 @@ public class LevelBuilder
 {
     public char character;
     public GameObject prefab;
-
 }

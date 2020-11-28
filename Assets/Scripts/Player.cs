@@ -13,11 +13,8 @@ public class Player : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-       
-        dir = Vector2.zero;
-        
-       
+    {    
+        dir = Vector2.zero;      
     }
 
     // Update is called once per frame
@@ -80,9 +77,6 @@ public class Player : MonoBehaviour
                 mov++;
             }             
         }
-        
-        
-
     }
 
 
@@ -120,9 +114,7 @@ public class Player : MonoBehaviour
                 }
             }
             
-        }
-        
+        }       
         return false;
    }
-
 }

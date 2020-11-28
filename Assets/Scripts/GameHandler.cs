@@ -48,14 +48,11 @@ public class GameHandler : MonoBehaviour
                     score++;
                     box.GetComponent<SpriteRenderer>().color = Color.red;
                     boxes.Remove(box);
-                    crosses.Remove(cross);
-                    
+                    crosses.Remove(cross);  
                 }
                 else
                 {
                     box.GetComponent<SpriteRenderer>().color = Color.white;
-                    
-                   
                 }
                 scoreText.text = score + "/" + length;
             }

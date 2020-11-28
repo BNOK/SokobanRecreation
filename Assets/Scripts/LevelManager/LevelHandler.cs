@@ -20,9 +20,14 @@ public class LevelHandler : MonoBehaviour
 
     private void GenerateMap()
     {
-        string[] rows = Regex.Split(mapText.text, "\r\n|\r|\n");
+        string[] maps = Regex.Split(mapText.text, ";");
+    }
 
-        foreach(string row in rows)
+    private void BuildMap(string[] level)
+    {
+        string[] rows = Regex.Split(mapText.text, "\r\n|\r|\n|");
+
+        foreach (string row in rows)
         {
             foreach(char c in row)
             {
@@ -31,7 +36,7 @@ public class LevelHandler : MonoBehaviour
                     if (c== lb.character)
                     {
                         Instantiate(lb.prefab, currentPos, Quaternion.identity);
-
+       
                     }
                 }
                 currentPos = new Vector2(++currentPos.x, currentPos.y);
